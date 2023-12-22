@@ -1,9 +1,6 @@
 package com.epam.mjc.io;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 
 public class FileReader {
@@ -16,15 +13,12 @@ public class FileReader {
                 myString += (char)ch;
             }
         }
-        catch (FileNotFoundException e){
+        catch (Exception e){
             e.printStackTrace();
         }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-        String name = "";
+        String name = null;
         int age = 0;
-        String email = "";
+        String email = null;
         long phone = 0;
 
         myString = myString.replace(System.getProperty("line.separator"), " ");
