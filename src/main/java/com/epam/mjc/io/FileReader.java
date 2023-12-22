@@ -17,7 +17,7 @@ public class FileReader {
             }
         }
         catch (FileNotFoundException e){
-            e.getMessage();
+            e.printStackTrace();
         }
         catch (IOException e){
             e.printStackTrace();
