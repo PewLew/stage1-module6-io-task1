@@ -13,19 +13,20 @@ public class FileReader {
             String[] subStr;
             String line = r.readLine();
             int i = 0;
+            int j = 0;
             while (line != null){
                 subStr = line.split(delimeter);
-                for(int j= 0; j < subStr.length; j++){
-                    myStr[i][j]= subStr[j];
-                }
+                myStr[i][j] = subStr[0];
+                myStr[i][j+1] = subStr[1];
                 line = r.readLine();
                 i++;
+                j = 0;
             }
 
-        }
-
-        catch (Exception e){
-            e.getStackTrace();
+        } catch (NullPointerException e){
+            e.getMessage();
+        } catch (Exception e){
+            e.getMessage();
         }
 
         int age = 0;
@@ -33,16 +34,16 @@ public class FileReader {
         String email = null;
         long phone = 0;
 
-        for(int i = 0; i <myStr.length; i++){
-            for(int j = 0; j < myStr[i].length; j++){
-                if(myStr[i][j].equals("Name:"))
-                    name = myStr[i][j+1];
-                if(myStr[i][j].equals("Age:"))
-                    age = Integer.parseInt((myStr[i][j+1]));
-                if(myStr[i][j].equals("Email:"))
-                    email = myStr[i][j+1];
-                if(myStr[i][j].equals("Phone:"))
-                    phone = Long.parseLong(myStr[i][j+1]);
+        for (String[] strings : myStr) {
+            for (int j = 0; j < strings.length; j++) {
+                if (strings[j].equals("Name:"))
+                    name = strings[j + 1];
+                if (strings[j].equals("Age:"))
+                    age = Integer.parseInt((strings[j + 1]));
+                if (strings[j].equals("Email:"))
+                    email = strings[j + 1];
+                if (strings[j].equals("Phone:"))
+                    phone = Long.parseLong(strings[j + 1]);
             }
         }
 
