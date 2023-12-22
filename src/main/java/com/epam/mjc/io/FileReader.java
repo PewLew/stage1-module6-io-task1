@@ -2,9 +2,6 @@ package com.epam.mjc.io;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Scanner;
 
 
 public class FileReader {
@@ -26,11 +23,9 @@ public class FileReader {
             }
 
         }
-        catch (FileNotFoundException e){
-            e.printStackTrace();
-        }
-        catch (IOException e){
-            e.printStackTrace();
+
+        catch (Exception e){
+            e.getStackTrace();
         }
 
         int age = 0;
