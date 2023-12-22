@@ -2,48 +2,45 @@ package com.epam.mjc.io;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 
 public class FileReader {
 
     public Profile getDataFromFile(File file) {
-        String[][] myStr = new String[4][2];
-        try(BufferedReader r = new BufferedReader(new java.io.FileReader(file.getName()))){
-            String delimeter = " ";
-            String[] subStr;
-            String line = r.readLine();
-            int i = 0;
-            int j = 0;
-            while (line != null){
-                subStr = line.split(delimeter);
-                myStr[i][j] = subStr[0];
-                myStr[i][j+1] = subStr[1];
-                line = r.readLine();
-                i++;
-                j = 0;
+        int ch;
+        String myString = "";
+        try(java.io.FileReader reader = new java.io.FileReader(file.getName())){
+            while ((ch = reader.read())!=-1){
+                myString += (char)ch;
             }
-
-        } catch (NullPointerException e){
-            e.getMessage();
-        } catch (Exception e){
+        }
+        catch (FileNotFoundException e){
             e.getMessage();
         }
-
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        String name = "";
         int age = 0;
-        String name = "kek";
-        String email = "kek";
+        String email = "";
         long phone = 0;
 
-        for (String[] strings : myStr) {
-            for (int j = 0; j < strings.length; j++) {
-                if (strings[j].equals("Name:"))
-                    name = strings[j + 1];
-                if (strings[j].equals("Age:"))
-                    age = Integer.parseInt((strings[j + 1]));
-                if (strings[j].equals("Email:"))
-                    email = strings[j + 1];
-                if (strings[j].equals("Phone:"))
-                    phone = Long.parseLong(strings[j + 1]);
+        myString = myString.replace(System.getProperty("line.separator"), " ");
+        String[] arr = myString.split(" ");
+        for(int i = 0; i < arr.length; i++){
+            if(arr[i].equals("Name:")){
+                name = arr[i+1];
+            }
+            if(arr[i].equals("Age:")){
+                age = Integer.parseInt(arr[i+1]);
+            }
+            if(arr[i].equals("Email:")){
+                email = arr[i+1];
+            }
+            if(arr[i].equals("Phone:")){
+                phone = Long.parseLong(arr[i+1]);
             }
         }
 
