@@ -7,10 +7,10 @@ public class FileReader {
 
     public Profile getDataFromFile(File file) {
         int ch;
-        String myString = "";
+        StringBuilder myString = new StringBuilder();
         try(java.io.FileReader reader = new java.io.FileReader(file.getName())){
             while ((ch = reader.read())!=-1){
-                myString += (char)ch;
+                myString.append((char)ch);
             }
         }
         catch (Exception e){
@@ -21,8 +21,9 @@ public class FileReader {
         String email = null;
         long phone = 0;
 
-        myString = myString.replace(System.getProperty("line.separator"), " ");
-        String[] arr = myString.split(" ");
+        String str = myString.toString();
+        str = str.replace(System.getProperty("line.separator"), " ");
+        String[] arr = str.split(" ");
         for(int i = 0; i < arr.length; i++){
             if(arr[i].equals("Name:")){
                 name = arr[i+1];
