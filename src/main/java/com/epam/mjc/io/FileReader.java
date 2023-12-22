@@ -30,8 +30,8 @@ public class FileReader {
         }
 
         int age = 0;
-        String name = null;
-        String email = null;
+        String name = "kek";
+        String email = "kek";
         long phone = 0;
 
         for (String[] strings : myStr) {
