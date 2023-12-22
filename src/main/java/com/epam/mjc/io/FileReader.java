@@ -2,6 +2,8 @@ package com.epam.mjc.io;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 
@@ -9,21 +11,25 @@ public class FileReader {
 
     public Profile getDataFromFile(File file) {
         String[][] myStr = new String[4][2];
-        try(Scanner sca = new Scanner(file)){
+        try(BufferedReader r = new BufferedReader(new java.io.FileReader(file.getName()))){
             String delimeter = " ";
             String[] subStr;
+            String line = r.readLine();
             int i = 0;
-
-            while(sca.hasNextLine()){
-                String line = sca.nextLine();
+            while (line != null){
                 subStr = line.split(delimeter);
-                for(int j = 0; j< subStr.length; j++){
-                    myStr[i][j] = subStr[j];
+                for(int j= 0; j < subStr.length; j++){
+                    myStr[i][j]= subStr[j];
                 }
+                line = r.readLine();
                 i++;
             }
+
         }
-        catch (Exception e){
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+        catch (IOException e){
             e.printStackTrace();
         }
 
